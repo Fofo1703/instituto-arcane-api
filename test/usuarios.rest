@@ -1,0 +1,40 @@
+GET http://localhost:3000/api/v1/usuarios HTTP/1.1
+
+###
+
+GET http://localhost:3000/api/v1/usuarios/d44d7fca-54c8-4c35-88f0-0704f2e8c769 HTTP/1.1
+
+###
+
+POST http://localhost:3000/api/v1/usuarios  HTTP/1.1
+content-type: application/json
+
+{
+        "usuario": "profesor",
+        "password": "1234",
+        "correo": "profesor@gmail.com",
+        "nombreRol": "profesor",
+        "borradoLogico": false,
+        "createdInfo": "fofo"
+
+
+}
+
+###
+
+PATCH  http://localhost:3000/api/v1/usuarios/84beca26-c9d3-454a-a81f-30e7bfa24549  HTTP/1.1
+content-type: application/json
+
+{
+
+        "usuario": "estudiante",
+        "password": "1234",
+        "correo": "estudiante@gmail.com",
+        "nombreRol": "estudiante",
+        "updatedInfo": "fofo"
+        
+}
+
+###
+
+DELETE http://localhost:3000/api/v1/usuarios/f8d80421-421e-4bc5-b597-ea1c6254b186 HTTP/1.1

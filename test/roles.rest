@@ -1,0 +1,32 @@
+GET http://localhost:3000/api/v1/roles HTTP/1.1
+
+###
+
+GET http://localhost:3000/api/v1/roles/dfce74b5-3fb3-4380-bd9f-095a8ee35613 HTTP/1.1
+
+###
+
+POST http://localhost:3000/api/v1/roles  HTTP/1.1
+content-type: application/json
+
+{
+        "nombre": "profesor",
+        "createdInfo": "fofo"
+
+}
+
+###
+
+PATCH  http://localhost:3000/api/v1/roles/dfce74b5-3fb3-4380-bd9f-095a8ee35613  HTTP/1.1
+content-type: application/json
+
+{
+
+        "nombre": "administrador",
+        "updatedInfo": "fofo"
+        
+}
+
+###
+
+DELETE http://localhost:3000/api/v1/roles/218d1318-6771-47bf-8ff0-2572dbd0820c HTTP/1.1

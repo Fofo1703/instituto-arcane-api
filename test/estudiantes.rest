@@ -1,0 +1,41 @@
+GET http://localhost:3000/api/v1/estudiantes HTTP/1.1
+
+###
+
+GET http://localhost:3000/api/v1/estudiantes/4c84eefc-c5aa-4548-9a88-9fc1a38c0d84 HTTP/1.1
+
+###
+
+POST http://localhost:3000/api/v1/estudiantes  HTTP/1.1
+content-type: application/json
+
+{
+        "correo": "estudiante@gmail.com",
+        "cedula": "123456789",
+        "nombre": "Rodolfo",
+        "telefono": "44444444",
+        "carrera": "Informática Empresarial",
+        "borradoLogico": false,
+        "createdInfo": "fofo"
+
+}
+
+###
+
+PATCH  http://localhost:3000/api/v1/estudiantes/4c84eefc-c5aa-4548-9a88-9fc1a38c0d84  HTTP/1.1
+content-type: application/json
+
+{
+
+        "correo": "estudiante@gmail.com",
+        "cedula": "123456789",
+        "nombre": "Rodolfo Méndez",
+        "telefono": "12345678",
+        "carrera": "Economía Agrícola",
+        "updatedInfo": "fofo"
+        
+}
+
+###
+
+DELETE http://localhost:3000/api/v1/estudiantes/4c84eefc-c5aa-4548-9a88-9fc1a38c0d84 HTTP/1.1
