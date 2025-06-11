@@ -1,13 +1,16 @@
 GET http://localhost:3000/api/v1/empleados HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjb3JyZW8iOiJkaXJlY3RvckBnbWFpbC5jb20iLCJpYXQiOjE3NDk2Mjc5ODcsImV4cCI6MTc0OTYzMTU4N30.OhQ-nhgFzmwyKQ7HmQasZP7_bQOJp4_Bz3RIrjduLVA
 
 ###
 
 GET http://localhost:3000/api/v1/empleados/ca696a4c-0e47-43c1-826e-a4e4b440d7ad HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjb3JyZW8iOiJkaXJlY3RvckBnbWFpbC5jb20iLCJpYXQiOjE3NDk2Mjc5ODcsImV4cCI6MTc0OTYzMTU4N30.OhQ-nhgFzmwyKQ7HmQasZP7_bQOJp4_Bz3RIrjduLVA
 
 ###
 
 POST http://localhost:3000/api/v1/empleados  HTTP/1.1
 content-type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjb3JyZW8iOiJkaXJlY3RvckBnbWFpbC5jb20iLCJpYXQiOjE3NDk2Mjc5ODcsImV4cCI6MTc0OTYzMTU4N30.OhQ-nhgFzmwyKQ7HmQasZP7_bQOJp4_Bz3RIrjduLVA
 
 {
         "correo": "profesor@gmail.com",
@@ -24,6 +27,7 @@ content-type: application/json
 
 PATCH  http://localhost:3000/api/v1/empleados/ca696a4c-0e47-43c1-826e-a4e4b440d7ad  HTTP/1.1
 content-type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjb3JyZW8iOiJkaXJlY3RvckBnbWFpbC5jb20iLCJpYXQiOjE3NDk2Mjc5ODcsImV4cCI6MTc0OTYzMTU4N30.OhQ-nhgFzmwyKQ7HmQasZP7_bQOJp4_Bz3RIrjduLVA
 
 {
 
@@ -39,3 +43,4 @@ content-type: application/json
 ###
 
 DELETE http://localhost:3000/api/v1/empleados/ca696a4c-0e47-43c1-826e-a4e4b440d7ad HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjb3JyZW8iOiJkaXJlY3RvckBnbWFpbC5jb20iLCJpYXQiOjE3NDk2Mjc5ODcsImV4cCI6MTc0OTYzMTU4N30.OhQ-nhgFzmwyKQ7HmQasZP7_bQOJp4_Bz3RIrjduLVA

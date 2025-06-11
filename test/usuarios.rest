@@ -1,19 +1,22 @@
 GET http://localhost:3000/api/v1/usuarios HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjb3JyZW8iOiJwcm9mZXNvckBnbWFpbC5jb20iLCJpYXQiOjE3NDk2MjIyMjIsImV4cCI6MTc0OTYyNTgyMn0.5n83MYozr2DOGJ0pKvfbVFn6k241t_tnjSN6vOiqvU0
 
 ###
 
 GET http://localhost:3000/api/v1/usuarios/d44d7fca-54c8-4c35-88f0-0704f2e8c769 HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjb3JyZW8iOiJwcm9mZXNvckBnbWFpbC5jb20iLCJpYXQiOjE3NDk2MjIyMjIsImV4cCI6MTc0OTYyNTgyMn0.5n83MYozr2DOGJ0pKvfbVFn6k241t_tnjSN6vOiqvU0
 
 ###
 
 POST http://localhost:3000/api/v1/usuarios  HTTP/1.1
 content-type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjb3JyZW8iOiJwcm9mZXNvckBnbWFpbC5jb20iLCJpYXQiOjE3NDk2MjIyMjIsImV4cCI6MTc0OTYyNTgyMn0.5n83MYozr2DOGJ0pKvfbVFn6k241t_tnjSN6vOiqvU0
 
 {
-        "usuario": "profesor",
+        "usuario": "estudiante",
         "password": "1234",
-        "correo": "profesor@gmail.com",
-        "nombreRol": "profesor",
+        "correo": "estudiante@gmail.com",
+        "nombreRol": "estudiante",
         "borradoLogico": false,
         "createdInfo": "fofo"
 
@@ -22,15 +25,16 @@ content-type: application/json
 
 ###
 
-PATCH  http://localhost:3000/api/v1/usuarios/84beca26-c9d3-454a-a81f-30e7bfa24549  HTTP/1.1
+PATCH  http://localhost:3000/api/v1/usuarios/bfd4a3e9-22b8-49ea-b893-2f3c8571bf70  HTTP/1.1
 content-type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjb3JyZW8iOiJwcm9mZXNvckBnbWFpbC5jb20iLCJpYXQiOjE3NDk2MjIyMjIsImV4cCI6MTc0OTYyNTgyMn0.5n83MYozr2DOGJ0pKvfbVFn6k241t_tnjSN6vOiqvU0
 
 {
 
-        "usuario": "estudiante",
+        "usuario": "fofo",
         "password": "1234",
-        "correo": "estudiante@gmail.com",
-        "nombreRol": "estudiante",
+        "correo": "fofo@gmail.com",
+        "nombreRol": "administrador",
         "updatedInfo": "fofo"
         
 }
@@ -38,3 +42,4 @@ content-type: application/json
 ###
 
 DELETE http://localhost:3000/api/v1/usuarios/f8d80421-421e-4bc5-b597-ea1c6254b186 HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjb3JyZW8iOiJwcm9mZXNvckBnbWFpbC5jb20iLCJpYXQiOjE3NDk2MjIyMjIsImV4cCI6MTc0OTYyNTgyMn0.5n83MYozr2DOGJ0pKvfbVFn6k241t_tnjSN6vOiqvU0

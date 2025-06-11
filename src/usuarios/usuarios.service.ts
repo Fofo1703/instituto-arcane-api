@@ -10,9 +10,11 @@ import { Usuario } from './entities/usuario.entity';
 import { Repository, UpdateResult } from 'typeorm';
 import { Rol } from 'src/roles/entities/rol.entity';
 import { UsuarioPlano } from './interfaz/usuario-plano.interface';
+import { RolesService } from 'src/roles/roles.service';
+import * as bcryptjs from 'bcryptjs';
+
 import * as dayjs from 'dayjs';
 import 'dayjs/locale/es'; // Carga el idioma español
-import { RolesService } from 'src/roles/roles.service';
 dayjs.locale('es'); // Configura el idioma español globalmente
 
 @Injectable()
@@ -39,7 +41,8 @@ export class UsuariosService {
 
       const fecha = dayjs().format('DD/MM/YYYY [a las] HH:mm');
       const mensaje = `Creado por el usuario ${createdInfo} el día ${fecha}`;
-
+      const passwordCrypt = await bcryptjs.hash(restoDto.password, 10);
+      restoDto.password = passwordCrypt;
       // Crear el nuevo usuario asignando el rol completo
       const usuario = this.usuariosRepository.create({
         ...restoDto,
@@ -125,56 +128,72 @@ export class UsuariosService {
     }
   }
 
+  async findByUsuario(usuario: string) {
+    return await this.usuariosRepository.findOne({
+      where: { borradoLogico: false, usuario: usuario },
+    });
+  }
+
   async findByCorreo(correo: string) {
     return await this.usuariosRepository.findOne({
       where: { borradoLogico: false, correo: correo },
     });
   }
 
-  async update(id: string, updateDto: UpdateUsuarioDto) {
-    const { nombreRol, updatedInfo, ...restoDto } = updateDto;
-    
-    try {
-      // Validar si el usuario existe
-      const usuario = await this.usuariosRepository.findOne({
-        where: { id, borradoLogico: false },
-      });
-      if (!usuario) {
-        throw new NotFoundException(`No se encontró un usuario con ID ${id}`);
-      }
+async update(id: string, updateDto: UpdateUsuarioDto) {
+  const { nombreRol, updatedInfo, ...restoDto } = updateDto;
 
-      let rol: Rol | null = null;
-
-      if (nombreRol) {
-        // Solo validar si se envió un idRol
-        // rol = await this.rolRepository.findOne({ where: { id: idRol } });
-        rol = await this.rolesService.findByName(nombreRol);
-        if (!rol) {
-          throw new NotFoundException(`No existe un rol con ID ${nombreRol}`);
-        }
-      }
-
-      const fecha = dayjs().format('DD/MM/YYYY [a las] HH:mm');
-      const mensaje = `Actualizado por el usuario ${updatedInfo} el día ${fecha}`;
-
-      // Construir el objeto de actualización excluyendo rol si no fue enviado
-      const datosActualizar: any = {
-        ...restoDto,
-        updatedInfo: mensaje,
-      };
-
-      if (rol) {
-        // datosActualizar.rol = { id: idRol };
-        datosActualizar.rol = rol;
-      }
-
-      return await this.usuariosRepository.update(id, datosActualizar);
-    } catch (error) {
-      if (error instanceof NotFoundException) throw error;
-      throw new InternalServerErrorException('Error al actualizar el usuario');
+  try {
+    // Validar si el usuario existe
+    const usuario = await this.usuariosRepository.findOne({
+      where: { id, borradoLogico: false },
+    });
+    if (!usuario) {
+      throw new NotFoundException(`No se encontró un usuario con ID ${id}`);
     }
+
+    let rol: Rol | null = null;
+
+    if (nombreRol) {
+      rol = await this.rolesService.findByName(nombreRol);
+      if (!rol) {
+        throw new NotFoundException(`No existe un rol con nombre ${nombreRol}`);
+      }
+    }
+
+    const fecha = dayjs().format('DD/MM/YYYY [a las] HH:mm');
+    const mensaje = `Actualizado por el usuario ${updatedInfo} el día ${fecha}`;
+
+    // Construir objeto de actualización
+    const datosActualizar: any = {
+      ...restoDto,
+      updatedInfo: mensaje,
+    };
+
+    // Si se envía una nueva contraseña, se encripta. Si no, se omite el campo para evitar `NULL`
+    if (restoDto.password) {
+      datosActualizar.password = await bcryptjs.hash(restoDto.password, 10);
+    }
+
+    if (rol) {
+      datosActualizar.rol = rol;
+    }
+
+    // Remover `password` si no fue proporcionado para evitar que sea `NULL`
+    if (!restoDto.password) {
+      delete datosActualizar.password;
+    }
+
+    await this.usuariosRepository.update(id, datosActualizar);
     
+    return await this.usuariosRepository.findOne({ where: { id } });
+  } catch (error) {
+    if (error instanceof NotFoundException) throw error;
+    throw new InternalServerErrorException('Error al actualizar el usuario');
   }
+}
+
+
 
   async remove(id: string) {
     const mensaje = 'Registro marcado como eliminado por el usuario tal';

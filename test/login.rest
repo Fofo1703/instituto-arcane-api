@@ -1,0 +1,16 @@
+POST http://localhost:3000/api/v1/auth/login  HTTP/1.1
+content-type: application/json
+
+{
+        "usuario": "director",
+        "password": "1234"
+}
+
+###
+
+GET http://localhost:3000/api/v1/auth/prueba  HTTP/1.1
+content-type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImJmZDRhM2U5LTIyYjgtNDllYS1iODkzLTJmM2M4NTcxYmY3MCIsImNvcnJlbyI6ImZvZm9AZ21haWwuY29tIiwicm9sIjoiYWRtaW5pc3RyYWRvciIsImlhdCI6MTc0OTU1NzI2OCwiZXhwIjoxNzQ5NTYwODY4fQ.OQp-VCW033FGC37D8V30Zie18E97Lyw_uCR9sNJF3dE
+
+
+###

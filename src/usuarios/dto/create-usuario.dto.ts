@@ -1,5 +1,5 @@
 import { Transform } from "class-transformer";
-import { IsBoolean, IsEmail, IsOptional, IsString, IsUUID, Length } from "class-validator";
+import { IsBoolean, IsEmail, IsOptional, IsString, Length } from "class-validator";
 
 export class CreateUsuarioDto {
 
@@ -15,6 +15,7 @@ export class CreateUsuarioDto {
         // message: "La contraseña debe contener al menos una mayúscula, una minúscula, un número y un carácter especial.",})
         password: string;
     
+        @Transform(({ value }) => value.trim())
         @IsEmail()
         correo: string;
         

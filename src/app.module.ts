@@ -5,6 +5,7 @@ import { ConfigModule } from '@nestjs/config';
 import { UsuariosModule } from './usuarios/usuarios.module';
 import { RolesModule } from './roles/roles.module';
 import { EmpleadosModule } from './empleados/empleados.module';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -19,6 +20,7 @@ import { EmpleadosModule } from './empleados/empleados.module';
     UsuariosModule,
     RolesModule,
     EmpleadosModule,
+    AuthModule,
   ],
   controllers: [],
   providers: [],

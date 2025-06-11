@@ -1,13 +1,16 @@
 GET http://localhost:3000/api/v1/roles HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjb3JyZW8iOiJwcm9mZXNvckBnbWFpbC5jb20iLCJpYXQiOjE3NDk2MjIyMjIsImV4cCI6MTc0OTYyNTgyMn0.5n83MYozr2DOGJ0pKvfbVFn6k241t_tnjSN6vOiqvU0
 
 ###
 
 GET http://localhost:3000/api/v1/roles/dfce74b5-3fb3-4380-bd9f-095a8ee35613 HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjb3JyZW8iOiJwcm9mZXNvckBnbWFpbC5jb20iLCJpYXQiOjE3NDk2MjIyMjIsImV4cCI6MTc0OTYyNTgyMn0.5n83MYozr2DOGJ0pKvfbVFn6k241t_tnjSN6vOiqvU0
 
 ###
 
 POST http://localhost:3000/api/v1/roles  HTTP/1.1
 content-type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjb3JyZW8iOiJwcm9mZXNvckBnbWFpbC5jb20iLCJpYXQiOjE3NDk2MjIyMjIsImV4cCI6MTc0OTYyNTgyMn0.5n83MYozr2DOGJ0pKvfbVFn6k241t_tnjSN6vOiqvU0
 
 {
         "nombre": "profesor",
@@ -19,6 +22,7 @@ content-type: application/json
 
 PATCH  http://localhost:3000/api/v1/roles/dfce74b5-3fb3-4380-bd9f-095a8ee35613  HTTP/1.1
 content-type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjb3JyZW8iOiJwcm9mZXNvckBnbWFpbC5jb20iLCJpYXQiOjE3NDk2MjIyMjIsImV4cCI6MTc0OTYyNTgyMn0.5n83MYozr2DOGJ0pKvfbVFn6k241t_tnjSN6vOiqvU0
 
 {
 
@@ -30,3 +34,4 @@ content-type: application/json
 ###
 
 DELETE http://localhost:3000/api/v1/roles/218d1318-6771-47bf-8ff0-2572dbd0820c HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjb3JyZW8iOiJwcm9mZXNvckBnbWFpbC5jb20iLCJpYXQiOjE3NDk2MjIyMjIsImV4cCI6MTc0OTYyNTgyMn0.5n83MYozr2DOGJ0pKvfbVFn6k241t_tnjSN6vOiqvU0
