@@ -1,4 +1,14 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+  UseGuards,
+  Req,
+} from '@nestjs/common';
 import { UsuariosService } from './usuarios.service';
 import { CreateUsuarioDto } from './dto/create-usuario.dto';
 import { UpdateUsuarioDto } from './dto/update-usuario.dto';
@@ -12,8 +22,9 @@ export class UsuariosController {
 
   @Post()
   @Roles('administrador')
-  create(@Body() createUsuarioDto: CreateUsuarioDto) {
-    return this.usuariosService.create(createUsuarioDto);
+  create(@Body() createUsuarioDto: CreateUsuarioDto, @Req() req: any) {
+    const usuario = req.usuario; // o req.user, según cómo lo guardaste en el guard
+    return this.usuariosService.create(createUsuarioDto, usuario);
   }
 
   @Get()
@@ -30,13 +41,19 @@ export class UsuariosController {
 
   @Patch(':id')
   @Roles('administrador')
-  update(@Param('id') id: string, @Body() updateUsuarioDto: UpdateUsuarioDto) {
-    return this.usuariosService.update(id, updateUsuarioDto);
+  update(
+    @Param('id') id: string,
+    @Body() updateUsuarioDto: UpdateUsuarioDto,
+    @Req() req: any,
+  ) {
+    const usuario = req.usuario;
+    return this.usuariosService.update(id, updateUsuarioDto, usuario);
   }
 
   @Delete(':id')
   @Roles('administrador')
-  remove(@Param('id') id: string) {
-    return this.usuariosService.remove(id);
+  remove(@Param('id') id: string, @Req() req: any) {
+    const usuario = req.usuario;
+    return this.usuariosService.remove(id, usuario);
   }
 }

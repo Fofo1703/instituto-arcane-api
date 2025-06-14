@@ -22,18 +22,4 @@ export class CreateUsuarioDto {
         @Transform(({ value }) => value.trim())
         @IsString()
         nombreRol: string;
-    
-        @IsBoolean()
-        borradoLogico: boolean;
-
-        @Transform(({ value }) => value.trim())
-        @IsString()
-        @Length(4, 20)
-        createdInfo: string;
-    
-        @Transform(({ value }) => value.trim())
-        @IsString()
-        @Length(4, 20)
-        @IsOptional()
-        updatedInfo?: string;
 }

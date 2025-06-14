@@ -15,10 +15,4 @@ export class AuthController {
         return this.authService.login(credencialesDto);
     }
 
-    @Get("prueba")
-    @UseGuards(AuthGuard)
-    prueba(@Request() req) {
-        return req.user;
-    }
-
 }

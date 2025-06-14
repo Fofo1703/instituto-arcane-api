@@ -26,12 +26,11 @@ export class UsuariosService {
     private readonly rolesService: RolesService,
   ) {}
 
-  async create(createUsuarioDto: CreateUsuarioDto) {
-    const { nombreRol, createdInfo, ...restoDto } = createUsuarioDto;
+  async create(createUsuarioDto: CreateUsuarioDto, usuarioToken: any) {
+    const { nombreRol, ...restoDto } = createUsuarioDto;
 
     try {
       // Validar si el rol existe
-      // const rol = await this.rolRepository.findOne({ where: { id: idRol } });
       const rol = await this.rolesService.findByName(nombreRol);
       if (!rol) {
         throw new NotFoundException(
@@ -40,19 +39,21 @@ export class UsuariosService {
       }
 
       const fecha = dayjs().format('DD/MM/YYYY [a las] HH:mm');
-      const mensaje = `Creado por el usuario ${createdInfo} el día ${fecha}`;
+      const mensaje = `Creado por el usuario ${usuarioToken.usuario} el día ${fecha}`;
       const passwordCrypt = await bcryptjs.hash(restoDto.password, 10);
       restoDto.password = passwordCrypt;
       // Crear el nuevo usuario asignando el rol completo
       const usuario = this.usuariosRepository.create({
         ...restoDto,
         rol,
+        borradoLogico: false,
         createdInfo: mensaje,
       });
 
       // Guardar el usuario
       return await this.usuariosRepository.save(usuario);
     } catch (error) {
+      
       if (error instanceof NotFoundException) {
         throw error; // re-lanzamos si es el error esperado
       }
@@ -140,8 +141,8 @@ export class UsuariosService {
     });
   }
 
-async update(id: string, updateDto: UpdateUsuarioDto) {
-  const { nombreRol, updatedInfo, ...restoDto } = updateDto;
+async update(id: string, updateDto: UpdateUsuarioDto, usuarioToken: any) {
+  const { nombreRol, ...restoDto } = updateDto;
 
   try {
     // Validar si el usuario existe
@@ -162,7 +163,7 @@ async update(id: string, updateDto: UpdateUsuarioDto) {
     }
 
     const fecha = dayjs().format('DD/MM/YYYY [a las] HH:mm');
-    const mensaje = `Actualizado por el usuario ${updatedInfo} el día ${fecha}`;
+    const mensaje = `Actualizado por el usuario ${usuarioToken.usuario} el día ${fecha}`;
 
     // Construir objeto de actualización
     const datosActualizar: any = {
@@ -195,14 +196,13 @@ async update(id: string, updateDto: UpdateUsuarioDto) {
 
 
 
-  async remove(id: string) {
-    const mensaje = 'Registro marcado como eliminado por el usuario tal';
+  async remove(id: string, usuarioToken: any) {
+    const mensaje = `Eliminado por el usuario ${usuarioToken.usuario}`;	
 
-    await this.usuariosRepository.update(id, {
+   return await this.usuariosRepository.update(id, {
       borradoLogico: true,
       updatedInfo: mensaje,
     });
 
-    return ``;
   }
 }

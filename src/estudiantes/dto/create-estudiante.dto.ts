@@ -1,5 +1,4 @@
 import {
-  IsBoolean,
   IsString,
   Length,
   IsOptional,
@@ -34,19 +33,4 @@ export class CreateEstudianteDto {
     @IsOptional()
     carrera?: string;
 
-    @Transform(({ value }) => value.trim())
-    @IsBoolean()
-    borradoLogico: boolean;
-
-    @Transform(({ value }) => value.trim())
-    @IsString()
-    @Length(1, 100)
-    createdInfo: string;
-
-    
-    @Transform(({ value }) => value.trim())
-    @IsString()
-    @Length(1, 100)
-    @IsOptional()
-    updatedInfo?: string;
 }

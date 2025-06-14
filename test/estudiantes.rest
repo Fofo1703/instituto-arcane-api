@@ -1,33 +1,32 @@
 GET http://localhost:3000/api/v1/estudiantes HTTP/1.1
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjb3JyZW8iOiJkaXJlY3RvckBnbWFpbC5jb20iLCJpYXQiOjE3NDk2Mjc5ODcsImV4cCI6MTc0OTYzMTU4N30.OhQ-nhgFzmwyKQ7HmQasZP7_bQOJp4_Bz3RIrjduLVA
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjoiZm9mbyIsImNvcnJlbyI6ImZvZm9AZ21haWwuY29tIiwicm9sIjoiYWRtaW5pc3RyYWRvciIsImlhdCI6MTc0OTkxNDY3MywiZXhwIjoxNzQ5OTE4MjczfQ.gWxDAWhhEkjOZNOdmh9ZyZdO1ZGF_bdvJpwjFUAStSY
+
 
 ###
 
 GET http://localhost:3000/api/v1/estudiantes/4c84eefc-c5aa-4548-9a88-9fc1a38c0d84 HTTP/1.1
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjb3JyZW8iOiJkaXJlY3RvckBnbWFpbC5jb20iLCJpYXQiOjE3NDk2Mjc5ODcsImV4cCI6MTc0OTYzMTU4N30.OhQ-nhgFzmwyKQ7HmQasZP7_bQOJp4_Bz3RIrjduLVA
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImIxOGZhYmIxLWE4NTUtNDZmOS04NTMzLTYxZDViZDhjYmNhOCIsImNvcnJlbyI6ImRpcmVjdG9yQGdtYWlsLmNvbSIsInJvbCI6ImRpcmVjdG9yIiwiaWF0IjoxNzQ5NzE2OTgzLCJleHAiOjE3NDk3MjA1ODN9.lJBSNpw9D_4iK8ZFA2n0Dk_W5HHWs8ALlVKLlGXKLc0
+
 
 ###
 
 POST http://localhost:3000/api/v1/estudiantes  HTTP/1.1
 content-type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjb3JyZW8iOiJwcm9mZXNvckBnbWFpbC5jb20iLCJpYXQiOjE3NDk2MjIyMjIsImV4cCI6MTc0OTYyNTgyMn0.5n83MYozr2DOGJ0pKvfbVFn6k241t_tnjSN6vOiqvU0
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImIxOGZhYmIxLWE4NTUtNDZmOS04NTMzLTYxZDViZDhjYmNhOCIsImNvcnJlbyI6ImRpcmVjdG9yQGdtYWlsLmNvbSIsInJvbCI6ImRpcmVjdG9yIiwiaWF0IjoxNzQ5NzE2OTgzLCJleHAiOjE3NDk3MjA1ODN9.lJBSNpw9D_4iK8ZFA2n0Dk_W5HHWs8ALlVKLlGXKLc0
 
 {
         "correo": "estudiante@gmail.com",
         "cedula": "123456789",
         "nombre": "Rodolfo",
         "telefono": "44444444",
-        "carrera": "Informática Empresarial",
-        "borradoLogico": false,
-        "createdInfo": "fofo"
+        "carrera": "Informática Empresarial"
 
 }
-
 ###
 
-PATCH  http://localhost:3000/api/v1/estudiantes/4c84eefc-c5aa-4548-9a88-9fc1a38c0d84  HTTP/1.1
+PATCH  http://localhost:3000/api/v1/estudiantes/usuario-estudiante/4c84eefc-c5aa-4548-9a88-9fc1a38c0d84  HTTP/1.1
 content-type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjb3JyZW8iOiJwcm9mZXNvckBnbWFpbC5jb20iLCJpYXQiOjE3NDk2MjIyMjIsImV4cCI6MTc0OTYyNTgyMn0.5n83MYozr2DOGJ0pKvfbVFn6k241t_tnjSN6vOiqvU0
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImQ0MjIyMGRiLTE5MzEtNGIxMi05MGJmLTkzNjI0NDg3OWM3YyIsImNvcnJlbyI6ImVzdHVkaWFudGVAZ21haWwuY29tIiwicm9sIjoiZXN0dWRpYW50ZSIsImlhdCI6MTc0OTcxNjkwOCwiZXhwIjoxNzQ5NzIwNTA4fQ.cWoy_6u2p0dopCtS0mhQOJ8elGI5fOEBd3Ksyox0x_8
 
 {
 
@@ -35,12 +34,48 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjb3JyZW8iOiJwcm9mZ
         "cedula": "123456789",
         "nombre": "Rodolfo Méndez",
         "telefono": "12345678",
-        "carrera": "Economía Agrícola",
-        "updatedInfo": "fofo"
+        "carrera": "Economía Agrícola"
         
+}
+
+
+###
+
+POST http://localhost:3000/api/v1/estudiantes/registro-estudiante  HTTP/1.1
+content-type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjoiZm9mbyIsImNvcnJlbyI6ImZvZm9AZ21haWwuY29tIiwicm9sIjoiYWRtaW5pc3RyYWRvciIsImlhdCI6MTc0OTgwNzI1OSwiZXhwIjoxNzQ5ODEwODU5fQ.nXC0HH_kY645ILjP6tcHNNz-YiiWfaEwR1SIizDrON0
+
+{
+        "usuario": "estudiante",
+        "password": "1234",
+        "correo": "estudiante@gmail.com",
+        "nombreRol": "estudiante",
+        "cedula": "123456789",
+        "nombre": "Estudiante apellido1 apellido2",
+        "telefono": "44444444",
+        "carrera": "Informática Empresarial"
+
+}
+
+###
+
+PATCH http://localhost:3000/api/v1/estudiantes/usuario-estudiante/c42a59dd-9061-4d4c-8ab4-afac55c737d2  HTTP/1.1
+content-type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjoiZm9mbyIsImNvcnJlbyI6ImZvZm9AZ21haWwuY29tIiwicm9sIjoiYWRtaW5pc3RyYWRvciIsImlhdCI6MTc0OTkxNDY3MywiZXhwIjoxNzQ5OTE4MjczfQ.gWxDAWhhEkjOZNOdmh9ZyZdO1ZGF_bdvJpwjFUAStSY
+
+{
+        "usuario": "estudiante",
+        "password": "1234",
+        "correo": "estudiante@gmail.com",
+        "nombreRol": "estudiante",
+        "cedula": "123456789",
+        "nombre": "Estudiante apellido1 apellido2",
+        "telefono": "44444444",
+        "carrera": "Informática Empresarial"
+
 }
 
 ###
 
 DELETE http://localhost:3000/api/v1/estudiantes/4c84eefc-c5aa-4548-9a88-9fc1a38c0d84 HTTP/1.1
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjb3JyZW8iOiJwcm9mZXNvckBnbWFpbC5jb20iLCJpYXQiOjE3NDk2MjIyMjIsImV4cCI6MTc0OTYyNTgyMn0.5n83MYozr2DOGJ0pKvfbVFn6k241t_tnjSN6vOiqvU0
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImQ0MjIyMGRiLTE5MzEtNGIxMi05MGJmLTkzNjI0NDg3OWM3YyIsImNvcnJlbyI6ImVzdHVkaWFudGVAZ21haWwuY29tIiwicm9sIjoiZXN0dWRpYW50ZSIsImlhdCI6MTc0OTcxNjkwOCwiZXhwIjoxNzQ5NzIwNTA4fQ.cWoy_6u2p0dopCtS0mhQOJ8elGI5fOEBd3Ksyox0x_8

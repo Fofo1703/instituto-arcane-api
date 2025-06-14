@@ -5,15 +5,18 @@ import {
 } from '@nestjs/common';
 import { CreateEmpleadoDto } from './dto/create-empleado.dto';
 import { UpdateEmpleadoDto } from './dto/update-empleado.dto';
-import { InjectRepository } from '@nestjs/typeorm';
+import { CreateUsuarioEmpleadoDto } from './dto/create-usuarioEmpleado.dto';
+import { EmpleadoPlano } from './interfaz/empleado-plano.interface';
 import { Empleado } from './entities/empleado.entity';
-import { Repository } from 'typeorm';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository, DataSource } from 'typeorm';
+import { RolesService } from 'src/roles/roles.service';
 import { UsuariosService } from 'src/usuarios/usuarios.service';
-
 import { Usuario } from 'src/usuarios/entities/usuario.entity';
+import * as bcryptjs from 'bcryptjs';
 import * as dayjs from 'dayjs';
 import 'dayjs/locale/es'; // Carga el idioma español
-import { EmpleadoPlano } from './interfaz/empleado-plano.interface';
+import { UpdateUsuarioEmpleadoDto } from './dto/update-usuarioEmpleado.dto';
 dayjs.locale('es'); // Configura el idioma español globalmente
 
 @Injectable()
@@ -21,15 +24,65 @@ export class EmpleadosService {
   constructor(
     @InjectRepository(Empleado)
     private readonly empleadosRepository: Repository<Empleado>,
+    private readonly dataSource: DataSource,
+    private readonly rolesService: RolesService,
     private readonly usuariosService: UsuariosService,
   ) {}
-  async create(createEmpleadoDto: CreateEmpleadoDto) {
-    const { correo, createdInfo, ...restoDto } = createEmpleadoDto;
+
+  async crearUsuarioYEmpleado(dto: CreateUsuarioEmpleadoDto, usuarioToken: any) {
+    const queryRunner = this.dataSource.createQueryRunner();
+    await queryRunner.connect();
+    await queryRunner.startTransaction();
+  
+    try {
+      // Verificar rol
+      const rol = await this.rolesService.findByName(dto.nombreRol);
+      if (!rol) {
+        throw new NotFoundException(`No existe un rol con el nombre ${dto.nombreRol}`);
+      }
+  
+      const passwordEncriptada = await bcryptjs.hash(dto.password, 10);
+      const fecha = dayjs().format('DD/MM/YYYY [a las] HH:mm');
+      const createdInfo = `Creado por el usuario ${usuarioToken.usuario} el día ${fecha}`;
+  
+      // Crear usuario
+      const usuario = queryRunner.manager.create(Usuario, {
+        usuario: dto.usuario,
+        password: passwordEncriptada,
+        correo: dto.correo,
+        rol,
+        createdInfo,
+        borradoLogico: false,
+      });
+      const usuarioGuardado = await queryRunner.manager.save(usuario);
+  
+      // Crear empleado
+      const empleado = queryRunner.manager.create(Empleado, {
+        cedula: dto.cedula,
+        nombre: dto.nombre,
+        telefono: dto.telefono,
+        carrera: dto.carrera,
+        usuario: usuarioGuardado,
+        createdInfo,
+        borradoLogico: false,
+      });
+      await queryRunner.manager.save(empleado);
+  
+      await queryRunner.commitTransaction();
+      return { message: 'Usuario y empleado creados exitosamente' };
+    } catch (error) {
+      await queryRunner.rollbackTransaction();
+      throw new InternalServerErrorException('Error al registrar usuario y empleado');
+    } finally {
+      await queryRunner.release();
+    }
+  }
+
+
+  async create(createEmpleadoDto: CreateEmpleadoDto, usuarioToken: any) {
+    const { correo, ...restoDto } = createEmpleadoDto;
 
     try {
-      // const usuario = await this.usuariosRepository.findOne({
-      //   where: { id: idUsuario },
-      // });
       const usuario = await this.usuariosService.findByCorreo(correo);
 
       if (!usuario) {
@@ -39,24 +92,24 @@ export class EmpleadosService {
       }
 
       const fecha = dayjs().format('DD/MM/YYYY [a las] HH:mm');
-      const mensaje = `Creado por el usuario ${createdInfo} el día ${fecha}`;
+      const mensaje = `Creado por el usuario ${usuarioToken.usuario} el día ${fecha}`;
 
       const empleado = this.empleadosRepository.create({
         ...restoDto,
         // usuario: { id: idUsuario }, // Asigna el ID dentro de un objeto Usuario
         usuario,
+        borradoLogico: false, // 👈 se fuerza siempre a false en un nuevo registro
         createdInfo: mensaje,
       });
 
       return await this.empleadosRepository.save(empleado);
     } catch (error) {
       if (error instanceof NotFoundException) {
-        throw error; // re-lanzamos si es el error esperado
+        throw error;
       }
 
-      // Aquí puede ser por problemas de conexión, FK, validación, etc.
       throw new InternalServerErrorException(
-        'No se pudo crear el estudiante por un error en el servidor',
+        'No se pudo crear el empleado por un error en el servidor',
       );
     }
   }
@@ -114,16 +167,22 @@ export class EmpleadosService {
       .getRawOne();
   }
 
-  async update(id: string, updateEmpleadoDto: UpdateEmpleadoDto) {
-    const { correo, updatedInfo, ...restoDto } = updateEmpleadoDto;
+
+
+  async update(
+    id: string,
+    updateEmpleadoDto: UpdateEmpleadoDto,
+    usuarioToken: any,
+  ) {
+    const { correo, ...restoDto } = updateEmpleadoDto;
+
     try {
       const empleado = await this.empleadosRepository.findOne({
-        where: { id: id, borradoLogico: false },
+        where: { id, borradoLogico: false },
       });
+
       if (!empleado) {
-        throw new NotFoundException(
-          `No se encontró un estudiante con ID ${id}`,
-        );
+        throw new NotFoundException(`No se encontró un empleado con ID ${id}`);
       }
 
       let usuario: Usuario | null = null;
@@ -137,7 +196,7 @@ export class EmpleadosService {
       }
 
       const fecha = dayjs().format('DD/MM/YYYY [a las] HH:mm');
-      const mensaje = `Actualizado por el usuario ${updatedInfo} el día ${fecha}`;
+      const mensaje = `Actualizado por el usuario ${usuarioToken.usuario} el día ${fecha}`;
 
       const datosActualizar: any = {
         ...restoDto,
@@ -151,14 +210,88 @@ export class EmpleadosService {
       return await this.empleadosRepository.update(id, datosActualizar);
     } catch (error) {
       if (error instanceof NotFoundException) throw error;
+
       throw new InternalServerErrorException('Error al actualizar el empleado');
     }
   }
 
-  async remove(id: string) {
-        const mensaje = 'Registro marcado como eliminado por el usuario tal';
+    async updateEmpleadoYUsuario(
+    idEmpleado: string,
+    dto: UpdateUsuarioEmpleadoDto,
+    usuarioToken: any
+  ) {
+    const queryRunner = this.dataSource.createQueryRunner();
+    await queryRunner.connect();
+    await queryRunner.startTransaction();
+  
+    try {
+      const empleado = await queryRunner.manager.findOne(Empleado, {
+        where: { id: idEmpleado, borradoLogico: false },
+        relations: ['usuario'],
+      });
+  
+      if (!empleado) {
+        throw new NotFoundException(`Empleado con ID ${idEmpleado} no encontrado`);
+      }
+  
+      const usuario = empleado.usuario;
+      if (!usuario) {
+        throw new NotFoundException(`El empleado no tiene un usuario asociado`);
+      }
+  
+      const fecha = dayjs().format('DD/MM/YYYY [a las] HH:mm');
+      const mensaje = `Actualizado por ${usuarioToken.usuario} el día ${fecha}`;
+  
+      // --- ACTUALIZAR USUARIO ---
+      const datosUsuario: any = {
+        updatedInfo: mensaje,
+      };
+  
+      if (dto.usuario) datosUsuario.usuario = dto.usuario;
+      if (dto.correo) datosUsuario.correo = dto.correo;
+      if (dto.password) {
+        datosUsuario.password = await bcryptjs.hash(dto.password, 10);
+      }
+  
+      if (dto.nombreRol) {
+        const rol = await this.rolesService.findByName(dto.nombreRol);
+        if (!rol) throw new NotFoundException(`Rol ${dto.nombreRol} no existe`);
+        datosUsuario.rol = rol;
+      }
+  
+      await queryRunner.manager.update(Usuario, usuario.id, datosUsuario);
+  
+      // --- ACTUALIZAR EMPLEADO ---
+      const datosEmpleado: any = {
+        updatedInfo: mensaje,
+      };
+  
+      if (dto.cedula) datosEmpleado.cedula = dto.cedula;
+      if (dto.nombre) datosEmpleado.nombre = dto.nombre;
+      if (dto.telefono) datosEmpleado.telefono = dto.telefono;
+      if (dto.carrera) datosEmpleado.carrera = dto.carrera;
+  
+      await queryRunner.manager.update(Empleado, idEmpleado, datosEmpleado);
+  
+      await queryRunner.commitTransaction();
+  
+      return {
+        message: 'Estudiante y usuario actualizados correctamente',
+      };
+    } catch (error) {
+      await queryRunner.rollbackTransaction();
+      if (error instanceof NotFoundException) throw error;
+      throw new InternalServerErrorException('Error al actualizar empleado y usuario');
+    } finally {
+      await queryRunner.release();
+    }
+  }
+  
 
-   return await this.empleadosRepository.update(id, {
+  async remove(id: string, usuarioToken: any) {
+   const mensaje = `Eliminado por el usuario ${usuarioToken.usuario}`;	
+
+    return await this.empleadosRepository.update(id, {
       borradoLogico: true,
       updatedInfo: mensaje,
     });

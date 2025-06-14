@@ -1,45 +1,41 @@
 GET http://localhost:3000/api/v1/usuarios HTTP/1.1
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjb3JyZW8iOiJwcm9mZXNvckBnbWFpbC5jb20iLCJpYXQiOjE3NDk2MjIyMjIsImV4cCI6MTc0OTYyNTgyMn0.5n83MYozr2DOGJ0pKvfbVFn6k241t_tnjSN6vOiqvU0
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjoiZm9mbyIsImNvcnJlbyI6ImZvZm9AZ21haWwuY29tIiwicm9sIjoiYWRtaW5pc3RyYWRvciIsImlhdCI6MTc0OTkyMDMzNCwiZXhwIjoxNzQ5OTIzOTM0fQ.7WrNTfgL30h4Xm-MfIjkZ9UELTorO-RHZ5gJ21haeZE
 
 ###
 
 GET http://localhost:3000/api/v1/usuarios/d44d7fca-54c8-4c35-88f0-0704f2e8c769 HTTP/1.1
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjb3JyZW8iOiJwcm9mZXNvckBnbWFpbC5jb20iLCJpYXQiOjE3NDk2MjIyMjIsImV4cCI6MTc0OTYyNTgyMn0.5n83MYozr2DOGJ0pKvfbVFn6k241t_tnjSN6vOiqvU0
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjoiZm9mbyIsImNvcnJlbyI6ImZvZm9AZ21haWwuY29tIiwicm9sIjoiYWRtaW5pc3RyYWRvciIsImlhdCI6MTc0OTc4OTgxOCwiZXhwIjoxNzQ5NzkzNDE4fQ.8BFpK5pgWvJ-ULc7SCvsRa1EqoCkkc6W26nax1gfnBk
 
 ###
 
 POST http://localhost:3000/api/v1/usuarios  HTTP/1.1
 content-type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjb3JyZW8iOiJwcm9mZXNvckBnbWFpbC5jb20iLCJpYXQiOjE3NDk2MjIyMjIsImV4cCI6MTc0OTYyNTgyMn0.5n83MYozr2DOGJ0pKvfbVFn6k241t_tnjSN6vOiqvU0
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjoiZm9mbyIsImNvcnJlbyI6ImZvZm9AZ21haWwuY29tIiwicm9sIjoiYWRtaW5pc3RyYWRvciIsImlhdCI6MTc0OTc4OTgxOCwiZXhwIjoxNzQ5NzkzNDE4fQ.8BFpK5pgWvJ-ULc7SCvsRa1EqoCkkc6W26nax1gfnBk
 
 {
-        "usuario": "estudiante",
+        "usuario": "profesor",
         "password": "1234",
-        "correo": "estudiante@gmail.com",
-        "nombreRol": "estudiante",
-        "borradoLogico": false,
-        "createdInfo": "fofo"
-
+        "correo": "profesor@gmail.com",
+        "nombreRol": "profesor"
 
 }
 
 ###
 
-PATCH  http://localhost:3000/api/v1/usuarios/bfd4a3e9-22b8-49ea-b893-2f3c8571bf70  HTTP/1.1
+PATCH  http://localhost:3000/api/v1/usuarios/e0fec03a-562c-4dae-808a-0910ea192322  HTTP/1.1
 content-type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjb3JyZW8iOiJwcm9mZXNvckBnbWFpbC5jb20iLCJpYXQiOjE3NDk2MjIyMjIsImV4cCI6MTc0OTYyNTgyMn0.5n83MYozr2DOGJ0pKvfbVFn6k241t_tnjSN6vOiqvU0
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjoiZm9mbyIsImNvcnJlbyI6ImZvZm9AZ21haWwuY29tIiwicm9sIjoiYWRtaW5pc3RyYWRvciIsImlhdCI6MTc0OTgwNzI1OSwiZXhwIjoxNzQ5ODEwODU5fQ.nXC0HH_kY645ILjP6tcHNNz-YiiWfaEwR1SIizDrON0
 
 {
 
-        "usuario": "fofo",
+        "usuario": "profesor",
         "password": "1234",
-        "correo": "fofo@gmail.com",
-        "nombreRol": "administrador",
-        "updatedInfo": "fofo"
+        "correo": "profesor@gmail.com",
+        "nombreRol": "profesor"
         
 }
 
 ###
 
-DELETE http://localhost:3000/api/v1/usuarios/f8d80421-421e-4bc5-b597-ea1c6254b186 HTTP/1.1
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjb3JyZW8iOiJwcm9mZXNvckBnbWFpbC5jb20iLCJpYXQiOjE3NDk2MjIyMjIsImV4cCI6MTc0OTYyNTgyMn0.5n83MYozr2DOGJ0pKvfbVFn6k241t_tnjSN6vOiqvU0
+DELETE http://localhost:3000/api/v1/usuarios/67ee8e77-f138-4e85-a99f-86e7a32ebaa7 HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjoiZm9mbyIsImNvcnJlbyI6ImZvZm9AZ21haWwuY29tIiwicm9sIjoiYWRtaW5pc3RyYWRvciIsImlhdCI6MTc0OTc4OTgxOCwiZXhwIjoxNzQ5NzkzNDE4fQ.8BFpK5pgWvJ-ULc7SCvsRa1EqoCkkc6W26nax1gfnBk

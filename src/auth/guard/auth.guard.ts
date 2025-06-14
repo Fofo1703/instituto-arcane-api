@@ -8,14 +8,12 @@ import {
 import { JwtService } from '@nestjs/jwt';
 import { Request } from 'express';
 import { Reflector } from '@nestjs/core';
-import { UsuariosService } from 'src/usuarios/usuarios.service';
 import { ROLES_KEY } from '../decorador/roles.decorator';
 
 @Injectable()
 export class AuthGuard implements CanActivate {
   constructor(
     private readonly jwtService: JwtService,
-    private readonly usuariosService: UsuariosService,
     private readonly reflector: Reflector,
   ) {}
 
@@ -32,24 +30,22 @@ export class AuthGuard implements CanActivate {
         secret: process.env.JWT_PASSWORD,
       });
 
-      request['user'] = payload;
-      const correo = payload.correo;
+      request['usuario'] = payload;
 
-      const usuario = await this.usuariosService.findByCorreo(correo);
-      if (!usuario) {
-        throw new UnauthorizedException('Usuario no encontrado');
+      const rolUsuario = payload.rol; // 👈 se obtiene directamente del token
+      if (!rolUsuario) {
+        throw new UnauthorizedException('No se encontró el rol del usuario');
       }
 
-      const rolUsuario = usuario.rol?.nombre;
-      request['user'].rol = rolUsuario; // opcional: guardar en el request
-
-      const rolesPermitidos = this.reflector.getAllAndOverride<string[]>(ROLES_KEY, [
-        context.getHandler(),
-        context.getClass(),
-      ]);
+      const rolesPermitidos = this.reflector.getAllAndOverride<string[]>(
+        ROLES_KEY,
+        [context.getHandler(), context.getClass()],
+      );
 
       if (rolesPermitidos && !rolesPermitidos.includes(rolUsuario)) {
-        throw new ForbiddenException(`Acceso denegado para el rol: ${rolUsuario}`);
+        throw new ForbiddenException(
+          `Acceso denegado para el rol: ${rolUsuario}`,
+        );
       }
 
       return true;
@@ -70,4 +66,3 @@ export class AuthGuard implements CanActivate {
     return type === 'Bearer' ? token : undefined;
   }
 }
-
