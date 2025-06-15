@@ -15,14 +15,13 @@ export class RolesService {
     private readonly rolRepository: Repository<Rol>,
   ) {}
 
-  async create(createRolDto: CreateRolDto) {
-    const { createdInfo, ...restoDto } = createRolDto;
+  async create(createRolDto: CreateRolDto, usuarioToken: any) {
 
-    const fecha = dayjs().format('DD/MM/YYYY [a las] HH:mm');
-    const mensaje = `Creado por el usuario ${createdInfo} el día ${fecha}`;
+     const fecha = dayjs().format('DD/MM/YYYY [a las] HH:mm');
+     const mensaje = `Creado por el usuario ${usuarioToken.usuario} el día ${fecha}`;
 
     const rol = this.rolRepository.create({
-      ...restoDto,
+      ...createRolDto,
       createdInfo: mensaje,
     });
 
@@ -41,15 +40,13 @@ export class RolesService {
     return await this.rolRepository.findOneBy({ nombre });
   }
 
-  async update(id: string, updateRolDto: UpdateRolDto) {
-    const { updatedInfo, ...restoDto } = updateRolDto;
+  async update(id: string, updateRolDto: UpdateRolDto, usuarioToken: any) {
 
-    const fecha = dayjs().format('DD/MM/YYYY [a las] HH:mm'); // Ej: 06/06/2025 a las 18:45
-
-    const mensaje = `Actualizado por el usuario ${updatedInfo} el día ${fecha}`;
+    const fecha = dayjs().format('DD/MM/YYYY [a las] HH:mm');
+    const mensaje = `Actualizado por el usuario ${usuarioToken.usuario} el día ${fecha}`;
 
     return await this.rolRepository.update(id, {
-      ...restoDto,
+      ...updateRolDto,
       updatedInfo: mensaje,
     });
   }

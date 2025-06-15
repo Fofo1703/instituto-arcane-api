@@ -185,9 +185,9 @@ async update(id: string, updateDto: UpdateUsuarioDto, usuarioToken: any) {
       delete datosActualizar.password;
     }
 
-    await this.usuariosRepository.update(id, datosActualizar);
+    return await this.usuariosRepository.update(id, datosActualizar);
     
-    return await this.usuariosRepository.findOne({ where: { id } });
+    
   } catch (error) {
     if (error instanceof NotFoundException) throw error;
     throw new InternalServerErrorException('Error al actualizar el usuario');

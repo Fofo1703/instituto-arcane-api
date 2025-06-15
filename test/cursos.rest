@@ -1,35 +1,35 @@
-GET http://localhost:3000/api/v1/roles HTTP/1.1
+GET http://localhost:3000/api/v1/cursos HTTP/1.1
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjoiZm9mbyIsImNvcnJlbyI6ImZvZm9AZ21haWwuY29tIiwicm9sIjoiYWRtaW5pc3RyYWRvciIsImlhdCI6MTc0OTk3Njg0NCwiZXhwIjoxNzQ5OTgwNDQ0fQ.026o3pPw7XKdw8cgH2zu4cd5lbFeGrT5DQ2Vg_EkLLM
 
 ###
 
-GET http://localhost:3000/api/v1/roles/dfce74b5-3fb3-4380-bd9f-095a8ee35613 HTTP/1.1
+GET http://localhost:3000/api/v1/cursos/dfce74b5-3fb3-4380-bd9f-095a8ee35613 HTTP/1.1
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjoiZm9mbyIsImNvcnJlbyI6ImZvZm9AZ21haWwuY29tIiwicm9sIjoiYWRtaW5pc3RyYWRvciIsImlhdCI6MTc0OTk3Njg0NCwiZXhwIjoxNzQ5OTgwNDQ0fQ.026o3pPw7XKdw8cgH2zu4cd5lbFeGrT5DQ2Vg_EkLLM
 
 ###
 
-POST http://localhost:3000/api/v1/roles  HTTP/1.1
+POST http://localhost:3000/api/v1/cursos  HTTP/1.1
 content-type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjoiZm9mbyIsImNvcnJlbyI6ImZvZm9AZ21haWwuY29tIiwicm9sIjoiYWRtaW5pc3RyYWRvciIsImlhdCI6MTc0OTk3Njg0NCwiZXhwIjoxNzQ5OTgwNDQ0fQ.026o3pPw7XKdw8cgH2zu4cd5lbFeGrT5DQ2Vg_EkLLM
 
 {
-        "nombre": "encargado-registro"
+        "nombre": "Matematicas Discretas"
 
 }
 
 ###
 
-PATCH  http://localhost:3000/api/v1/roles/5d01a117-9b76-49bf-b5e1-92112ba44a88  HTTP/1.1
+PATCH  http://localhost:3000/api/v1/cursos/1be818d2-f458-48ac-a3c9-6ebcee7acc8a  HTTP/1.1
 content-type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjoiZm9mbyIsImNvcnJlbyI6ImZvZm9AZ21haWwuY29tIiwicm9sIjoiYWRtaW5pc3RyYWRvciIsImlhdCI6MTc0OTk3Njg0NCwiZXhwIjoxNzQ5OTgwNDQ0fQ.026o3pPw7XKdw8cgH2zu4cd5lbFeGrT5DQ2Vg_EkLLM
 
 {
 
-        "nombre": "encargado-registro"
+        "nombre": "Matemáticas Discretas"
         
 }
 
 ###
 
-DELETE http://localhost:3000/api/v1/roles/5d01a117-9b76-49bf-b5e1-92112ba44a88 HTTP/1.1
+DELETE http://localhost:3000/api/v1/cursos/1be818d2-f458-48ac-a3c9-6ebcee7acc8a HTTP/1.1
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjoiZm9mbyIsImNvcnJlbyI6ImZvZm9AZ21haWwuY29tIiwicm9sIjoiYWRtaW5pc3RyYWRvciIsImlhdCI6MTc0OTk3Njg0NCwiZXhwIjoxNzQ5OTgwNDQ0fQ.026o3pPw7XKdw8cgH2zu4cd5lbFeGrT5DQ2Vg_EkLLM

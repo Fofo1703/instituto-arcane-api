@@ -6,6 +6,7 @@ import { UsuariosModule } from './usuarios/usuarios.module';
 import { RolesModule } from './roles/roles.module';
 import { EmpleadosModule } from './empleados/empleados.module';
 import { AuthModule } from './auth/auth.module';
+import { CursosModule } from './cursos/cursos.module';
 
 @Module({
   imports: [
@@ -21,6 +22,7 @@ import { AuthModule } from './auth/auth.module';
     RolesModule,
     EmpleadosModule,
     AuthModule,
+    CursosModule,
   ],
   controllers: [],
   providers: [],
