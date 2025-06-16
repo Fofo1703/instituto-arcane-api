@@ -51,7 +51,7 @@ export class RolesService {
     });
   }
 
-  remove(id: string) {
-    return this.rolRepository.delete(id);
+  async remove(id: string) {
+    return await this.rolRepository.delete(id);
   }
 }

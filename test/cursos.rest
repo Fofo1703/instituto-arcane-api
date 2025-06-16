@@ -33,3 +33,6 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjoiZm9mb
 
 DELETE http://localhost:3000/api/v1/cursos/1be818d2-f458-48ac-a3c9-6ebcee7acc8a HTTP/1.1
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjoiZm9mbyIsImNvcnJlbyI6ImZvZm9AZ21haWwuY29tIiwicm9sIjoiYWRtaW5pc3RyYWRvciIsImlhdCI6MTc0OTk3Njg0NCwiZXhwIjoxNzQ5OTgwNDQ0fQ.026o3pPw7XKdw8cgH2zu4cd5lbFeGrT5DQ2Vg_EkLLM
+
+
+supabase snippets download 78074e7f-3c89-4a99-b231-190a596b7cfe > \database.sql

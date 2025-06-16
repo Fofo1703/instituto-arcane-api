@@ -148,25 +148,30 @@ export class EmpleadosService {
     }
   }
 
-  async findOne(id: string): Promise<void> {
-    return await this.empleadosRepository
-      .createQueryBuilder('empleado')
-      .leftJoin('empleado.usuario', 'usuario')
-      .select([
-        'empleado.id AS id',
-        'empleado.cedula AS cedula',
-        'empleado.nombre AS nombre',
-        'empleado.telefono AS telefono',
-        'empleado.carrera AS carrera',
-        'empleado.createdInfo AS createdInfo',
-        'empleado.updatedInfo AS updatedInfo',
-        'usuario.id AS idUsuario', // Solo el ID del usuario
-      ])
-      .where('empleado.id = :id', { id })
-      .andWhere('empleado.borradoLogico = false')
-      .getRawOne();
-  }
+async findOne(id: string): Promise<EmpleadoPlano | null> {
+  const empleado = await this.empleadosRepository
+    .createQueryBuilder('empleado')
+    .leftJoin('empleado.usuario', 'usuario')
+    .select([
+      'empleado.id AS id',
+      'empleado.cedula AS cedula',
+      'empleado.nombre AS nombre',
+      'empleado.telefono AS telefono',
+      'empleado.carrera AS carrera',
+      'empleado.createdInfo AS createdInfo',
+      'empleado.updatedInfo AS updatedInfo',
+      'usuario.id AS idUsuario', // Solo el ID del usuario
+    ])
+    .where('empleado.id = :id', { id })
+    .andWhere('empleado.borradoLogico = false')
+    .getRawOne();
 
+  return empleado ?? null; // Devuelve `null` si no hay resultado
+}
+
+  async findOneById(id: string) {
+    return await this.empleadosRepository.findOneBy({ id });
+  }
 
 
   async update(

@@ -7,6 +7,7 @@ import { RolesModule } from './roles/roles.module';
 import { EmpleadosModule } from './empleados/empleados.module';
 import { AuthModule } from './auth/auth.module';
 import { CursosModule } from './cursos/cursos.module';
+import { HorariosModule } from './horarios/horarios.module';
 
 @Module({
   imports: [
@@ -23,6 +24,7 @@ import { CursosModule } from './cursos/cursos.module';
     EmpleadosModule,
     AuthModule,
     CursosModule,
+    HorariosModule,
   ],
   controllers: [],
   providers: [],
