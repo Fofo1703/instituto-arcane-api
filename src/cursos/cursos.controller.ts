@@ -11,34 +11,33 @@ export class CursosController {
   constructor(private readonly cursosService: CursosService) {}
 
   @Post()
-  @Roles('administrador', 'director')
+  @Roles('administrador', 'encargado-registro')
   create(@Body() createCursoDto: CreateCursoDto, @Req() req: any) {
     const usuario = req.usuario;
     return this.cursosService.create(createCursoDto, usuario);
   }
 
   @Get()
-  @Roles('administrador', 'director')
+  @Roles('administrador', 'encargado-registro')
   findAll() {
     return this.cursosService.findAll();
   }
 
   @Get(':id')
-  @Roles('administrador', 'director')
+  @Roles('administrador', 'encargado-registro')
   findOne(@Param('id') id: string) {
     return this.cursosService.findOne(id);
   }
 
   @Patch(':id')
-  @Roles('administrador', 'director')
-  @Roles('administrador', 'director')
+  @Roles('administrador', 'encargado-registro')
   update(@Param('id') id: string, @Body() updateCursoDto: UpdateCursoDto, @Req() req: any) {
     const usuario = req.usuario;
     return this.cursosService.update(id, updateCursoDto, usuario);
   }
 
   @Delete(':id')
-  @Roles('administrador', 'director')
+  @Roles('administrador', 'encargado-registro')
   remove(@Param('id') id: string) {
     return this.cursosService.remove(id);
   }

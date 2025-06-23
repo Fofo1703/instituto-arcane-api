@@ -1,0 +1,49 @@
+GET http://localhost:3000/api/v1/horarios HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjoiZm9mbyIsImNvcnJlbyI6ImZvZm9AZ21haWwuY29tIiwicm9sIjoiYWRtaW5pc3RyYWRvciIsImlhdCI6MTc1MDA2MjI0MSwiZXhwIjoxNzUwMDY1ODQxfQ.aSKmxTNTlGSFdpHcW0ku8u20kC3tHJzhyIB_Ux8ECsE
+
+###
+
+GET http://localhost:3000/api/v1/horarios/cb42e070-4880-49f2-a7d3-8625f81e1aa1 HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjoiZm9mbyIsImNvcnJlbyI6ImZvZm9AZ21haWwuY29tIiwicm9sIjoiYWRtaW5pc3RyYWRvciIsImlhdCI6MTc1MDA2MjI0MSwiZXhwIjoxNzUwMDY1ODQxfQ.aSKmxTNTlGSFdpHcW0ku8u20kC3tHJzhyIB_Ux8ECsE
+
+###
+
+POST http://localhost:3000/api/v1/horarios  HTTP/1.1
+content-type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjoiZm9mbyIsImNvcnJlbyI6ImZvZm9AZ21haWwuY29tIiwicm9sIjoiYWRtaW5pc3RyYWRvciIsImlhdCI6MTc1MDA2MjI0MSwiZXhwIjoxNzUwMDY1ODQxfQ.aSKmxTNTlGSFdpHcW0ku8u20kC3tHJzhyIB_Ux8ECsE
+
+{
+        "idCurso": "b14254e0-cdc0-4331-a519-c0c68e38129f",
+        "idProfesor": "3e8bf2c3-f7ce-40c6-8e5d-8977c55c9d7c",
+        "dia": "Lunes",
+        "horaInicio": "13:00",
+        "horaFin": "17:00",
+        "ciclo": "I-2025",
+        "cantidadCupo": 30
+
+}
+
+###
+
+PATCH  http://localhost:3000/api/v1/horarios/cb42e070-4880-49f2-a7d3-8625f81e1aa1  HTTP/1.1
+content-type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjoiZm9mbyIsImNvcnJlbyI6ImZvZm9AZ21haWwuY29tIiwicm9sIjoiYWRtaW5pc3RyYWRvciIsImlhdCI6MTc1MDA2MjI0MSwiZXhwIjoxNzUwMDY1ODQxfQ.aSKmxTNTlGSFdpHcW0ku8u20kC3tHJzhyIB_Ux8ECsE
+
+{
+
+        "idCurso": "2d3bf2f0-1da4-4360-a9d8-3cc51c2e2d2e",
+        "idProfesor": "3e8bf2c3-f7ce-40c6-8e5d-8977c55c9d7c",
+        "dia": "Lunes",
+        "horaInicio": "13:00",
+        "horaFin": "17:00",
+        "ciclo": "I-2025",
+        "cantidadCupo": 30
+        
+}
+
+###
+
+DELETE http://localhost:3000/api/v1/cursos/1be818d2-f458-48ac-a3c9-6ebcee7acc8a HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjoiZm9mbyIsImNvcnJlbyI6ImZvZm9AZ21haWwuY29tIiwicm9sIjoiYWRtaW5pc3RyYWRvciIsImlhdCI6MTc1MDA2MjI0MSwiZXhwIjoxNzUwMDY1ODQxfQ.aSKmxTNTlGSFdpHcW0ku8u20kC3tHJzhyIB_Ux8ECsE
+
+

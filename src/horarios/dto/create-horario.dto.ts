@@ -4,12 +4,10 @@ import { IsNumber, IsString, IsTimeZone, Length, Matches, Max } from 'class-vali
 export class CreateHorarioDto {
   @Transform(({ value }) => value.trim())
   @IsString()
-  @Length(5, 20)
   idCurso: string;
 
   @Transform(({ value }) => value.trim())
   @IsString()
-  @Length(1, 40) // Máximo 40 caracteres
   idProfesor: string;
 
   @Transform(({ value }) => value.trim())

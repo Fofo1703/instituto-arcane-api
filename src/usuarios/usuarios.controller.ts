@@ -21,26 +21,26 @@ export class UsuariosController {
   constructor(private readonly usuariosService: UsuariosService) {}
 
   @Post()
-  @Roles('administrador')
+  @Roles('administrador', 'encargado-registro')
   create(@Body() createUsuarioDto: CreateUsuarioDto, @Req() req: any) {
     const usuario = req.usuario; // o req.user, según cómo lo guardaste en el guard
     return this.usuariosService.create(createUsuarioDto, usuario);
   }
 
   @Get()
-  @Roles('administrador')
+  @Roles('administrador', 'encargado-registro')
   findAll() {
     return this.usuariosService.findAll();
   }
 
   @Get(':id')
-  @Roles('administrador')
+  @Roles('administrador', 'encargado-registro')
   findOne(@Param('id') id: string) {
     return this.usuariosService.findOne(id);
   }
 
   @Patch(':id')
-  @Roles('administrador')
+  @Roles('administrador', 'encargado-registro')
   update(
     @Param('id') id: string,
     @Body() updateUsuarioDto: UpdateUsuarioDto,
@@ -51,7 +51,7 @@ export class UsuariosController {
   }
 
   @Delete(':id')
-  @Roles('administrador')
+  @Roles('administrador', 'encargado-registro')
   remove(@Param('id') id: string, @Req() req: any) {
     const usuario = req.usuario;
     return this.usuariosService.remove(id, usuario);

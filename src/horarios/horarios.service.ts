@@ -77,8 +77,8 @@ export class HorariosService {
 
       //si hay un profesor se valida que exista
       let profesor: Empleado | null = null;
-      if (idCurso) {
-        profesor = await this.empleadosService.findOneById(idCurso);
+      if (idProfesor) {
+        profesor = await this.empleadosService.findOneById(idProfesor);
         if (!profesor) {
           throw new NotFoundException(
             `No se encontró el profesor seleccionado`,

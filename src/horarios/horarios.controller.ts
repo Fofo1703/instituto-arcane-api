@@ -11,33 +11,33 @@ export class HorariosController {
   constructor(private readonly horariosService: HorariosService) {}
 
   @Post()
-  @Roles('administrador', 'director')
+  @Roles('administrador', 'encargado-registro')
   create(@Body() createHorarioDto: CreateHorarioDto, @Req() req: any) {
     const usuario = req.usuario;
     return this.horariosService.create(createHorarioDto, usuario);
   }
 
   @Get()
-  @Roles('administrador', 'director')
+  @Roles('administrador', 'encargado-registro')
   findAll() {
     return this.horariosService.findAll();
   }
 
   @Get(':id')
-  @Roles('administrador', 'director')
+  @Roles('administrador', 'encargado-registro')
   findOne(@Param('id') id: string) {
     return this.horariosService.findOne(id);
   }
 
   @Patch(':id')
-  @Roles('administrador', 'director')
+  @Roles('administrador', 'encargado-registro')
   update(@Param('id') id: string, @Body() updateHorarioDto: UpdateHorarioDto, @Req() req: any) {
     const usuario = req.usuario;
     return this.horariosService.update(id, updateHorarioDto, usuario);
   }
 
   @Delete(':id')
-  @Roles('administrador', 'director')
+  @Roles('administrador', 'encargado-registro')
   remove(@Param('id') id: string) {
     return this.horariosService.remove(id);
   }

@@ -25,9 +25,12 @@ export class CursosService {
     return await this.cursosRepository.save(curso);
   }
 
-  async findAll() {
-    return await this.cursosRepository.find();
-  }
+async findAll() {
+  return await this.cursosRepository.find({
+    relations: ['horarios'], // Carga la relación con Horario
+  });
+}
+
 
   async findOne(id: string) {
     return await this.cursosRepository.findOneBy({ id });
