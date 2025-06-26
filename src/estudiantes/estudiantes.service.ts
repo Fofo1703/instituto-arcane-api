@@ -14,6 +14,7 @@ import { UsuariosService } from 'src/usuarios/usuarios.service';
 import { RolesService } from 'src/roles/roles.service';
 import { Usuario } from 'src/usuarios/entities/usuario.entity';
 import * as bcryptjs from 'bcryptjs';
+import * as crypto from 'crypto';
 
 import * as dayjs from 'dayjs';
 import 'dayjs/locale/es'; // Carga el idioma español
@@ -38,12 +39,14 @@ async crearUsuarioYEstudiante(dto: CreateUsuarioEstudianteDto, usuarioToken: any
 
   try {
     // Verificar rol
-    const rol = await this.rolesService.findByName(dto.nombreRol);
+    const rol = await this.rolesService.findByName('estudiante');
     if (!rol) {
-      throw new NotFoundException(`No existe un rol con el nombre ${dto.nombreRol}`);
+      throw new NotFoundException(`No existe el rol estudiante`);
     }
 
-    const passwordEncriptada = await bcryptjs.hash(dto.password, 10);
+    // Encriptar contraseña
+    const passwordGenerada = crypto.randomBytes(6).toString('base64');
+    const passwordEncriptada = await bcryptjs.hash(passwordGenerada, 10);
     const fecha = dayjs().format('DD/MM/YYYY [a las] HH:mm');
     const createdInfo = `Creado por el usuario ${usuarioToken.usuario} el día ${fecha}`;
 
@@ -253,12 +256,6 @@ async crearUsuarioYEstudiante(dto: CreateUsuarioEstudianteDto, usuarioToken: any
     if (dto.correo) datosUsuario.correo = dto.correo;
     if (dto.password) {
       datosUsuario.password = await bcryptjs.hash(dto.password, 10);
-    }
-
-    if (dto.nombreRol) {
-      const rol = await this.rolesService.findByName(dto.nombreRol);
-      if (!rol) throw new NotFoundException(`Rol ${dto.nombreRol} no existe`);
-      datosUsuario.rol = rol;
     }
 
     await queryRunner.manager.update(Usuario, usuario.id, datosUsuario);

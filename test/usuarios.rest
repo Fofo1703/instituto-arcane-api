@@ -3,20 +3,20 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjoiZm9mb
 
 ###
 
-GET http://localhost:3000/api/v1/usuarios/d44d7fca-54c8-4c35-88f0-0704f2e8c769 HTTP/1.1
+GET http://localhost:444/api/v1/usuarios/d44d7fca-54c8-4c35-88f0-0704f2e8c769 HTTP/1.1
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjoiZm9mbyIsImNvcnJlbyI6ImZvZm9AZ21haWwuY29tIiwicm9sIjoiYWRtaW5pc3RyYWRvciIsImlhdCI6MTc0OTc4OTgxOCwiZXhwIjoxNzQ5NzkzNDE4fQ.8BFpK5pgWvJ-ULc7SCvsRa1EqoCkkc6W26nax1gfnBk
 
 ###
 
-POST http://localhost:3000/api/v1/usuarios  HTTP/1.1
+POST http://localhost:444/api/v1/usuarios  HTTP/1.1
 content-type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjoiZm9mbyIsImNvcnJlbyI6ImZvZm9AZ21haWwuY29tIiwicm9sIjoiYWRtaW5pc3RyYWRvciIsImlhdCI6MTc0OTc4OTgxOCwiZXhwIjoxNzQ5NzkzNDE4fQ.8BFpK5pgWvJ-ULc7SCvsRa1EqoCkkc6W26nax1gfnBk
 
 {
-        "usuario": "profesor",
+        "usuario": "fofo",
         "password": "1234",
-        "correo": "profesor@gmail.com",
-        "nombreRol": "profesor"
+        "correo": "fofo@gmail.com",
+        "nombreRol": "administrador"
 
 }
 
