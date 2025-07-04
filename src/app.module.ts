@@ -8,6 +8,7 @@ import { EmpleadosModule } from './empleados/empleados.module';
 import { AuthModule } from './auth/auth.module';
 import { CursosModule } from './cursos/cursos.module';
 import { HorariosModule } from './horarios/horarios.module';
+import { MsUsuariosModule } from './ms-usuarios/ms-usuarios.module';
 
 @Module({
   imports: [
@@ -25,6 +26,7 @@ import { HorariosModule } from './horarios/horarios.module';
     AuthModule,
     CursosModule,
     HorariosModule,
+    MsUsuariosModule,
   ],
   controllers: [],
   providers: [],
